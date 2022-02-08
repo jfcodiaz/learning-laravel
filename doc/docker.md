@@ -21,6 +21,28 @@ docker exec -it proyecto_www comando bash
 ```
 Ejecuta un comando dentro del contenedor, se puede ejecutar bash o sh para tomar control del contenedor
 
+
+```shel
+docker system prune
+```
+Elimina todos los contenedores que no estan en uso
+
+```shel
+docker rmi $(docker images -a -q)
+```
+Elimina todas las images
+
+```shel
+docker volume prune
+```
+Elimina todos los volumenes que no esten en uso 
+
+```shel
+sudo usermod -aG docker ${USER}
+```
+Agrega el usuario actual a docker para no necesitar el sudo al usar docker
+
+
 ### Docker Compose:
 ```shel
 docker-compose up
