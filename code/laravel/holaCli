@@ -1,0 +1,5 @@
+#!/usr/local/bin/php
+<?php
+echo "--------\n";
+echo "Hola Mundo Cli";
+echo "\n--------\n";

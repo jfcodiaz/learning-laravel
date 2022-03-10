@@ -7,6 +7,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     nano \
     && phpModules=" \
     mysqli \
+    pdo_pgsql \
     pdo_mysql \
     "
 
@@ -33,6 +34,7 @@ ENV PATH /usr/local/go/bin:$PATH
 RUN go get github.com/mailhog/mhsendmail
 RUN cp /root/go/bin/mhsendmail /usr/bin/mhsendmail
 
+RUN docker-php-ext-install pdo pdo_mysql
 
 WORKDIR "/var/www"
 
