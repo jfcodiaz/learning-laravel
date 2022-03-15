@@ -71,9 +71,7 @@ class gelatinas extends Command
         $obj3 = Singleton::getInstance();
 
         $obj4 = Singleton::getInstance();
-
-        dd($obj2 === $obj3 );
-        die;
+        
         $this->line(MoldeGelatina::getMaterial());
         $gelatinaDeLimon = new MoldeGelatina('limon');
         $gelatinaDeLimon->setSabor('naranja');
