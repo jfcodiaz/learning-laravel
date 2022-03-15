@@ -36,6 +36,20 @@ RUN cp /root/go/bin/mhsendmail /usr/bin/mhsendmail
 
 RUN docker-php-ext-install pdo pdo_mysql
 
+
+RUN mkdir /root/.nvm
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION v12.22.10
+
+
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.9/install.sh | bash
+RUN chmod +x $HOME/.nvm/nvm.sh
+RUN . $HOME/.nvm/nvm.sh && nvm install $NODE_VERSION && nvm alias default $NODE_VERSION && nvm use default && npm install -g npm
+
+RUN ln -sf /root/.nvm/versions/node/v$NODE_VERSION/bin/node /usr/bin/nodejs
+RUN ln -sf /root/.nvm/versions/node/v$NODE_VERSION/bin/node /usr/bin/node
+RUN ln -sf /root/.nvm/versions/node/v$NODE_VERSION/bin/npm /usr/bin/npm
+
 WORKDIR "/var/www"
 
 EXPOSE 80
