@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Http\Requests\ProductRequests;
 use App\Services\Products\CreateProductService;
 use App\Services\Products\UpdateProductService;
+use Illuminate\Support\Facades\Auth;
 
 
 class ProductController extends Controller

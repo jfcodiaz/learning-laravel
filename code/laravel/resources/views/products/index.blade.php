@@ -12,7 +12,9 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Descriptions</th>
-                    <th>&nbsp;</th>
+                    @can('destroy_product')
+                        <th>&nbsp;</th>
+                    @endcan
                 </tr>
                 </thead>
                 <tbody>
@@ -21,13 +23,15 @@
                         <td>{{ $product->id }}</td>
                         <td><a href="{{ route('products.show', ['product' => $product]) }}">{{ $product->name }}</a></td>
                         <td>{{ $product->description }}</td>
-                        <td>
-                            <form action="{{ route('products.destroy',  ['product' => $product]) }}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <input type="submit" value="Delete" class="btn btn-danger btn-sm">
-                            </form>
-                        </td>
+                        @can('destroy_product')
+                            <td>
+                                <form action="{{ route('products.destroy',  ['product' => $product]) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                                </form>
+                            </td>
+                        @endcan
                     </tr>
                 @empty
                     <tr>

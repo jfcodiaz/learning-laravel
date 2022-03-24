@@ -17,8 +17,9 @@ class RegistrationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_new_users_can_register()
+    public function xtest_new_users_can_register()
     {
+        $this->markTestSkipped('ASD3123');
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
