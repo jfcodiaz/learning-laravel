@@ -4,13 +4,14 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductFactory extends Factory
+class CategoryFactory extends Factory
 {
     public function definition()
     {
         return [
             'name' => $this->faker->name,
-            'description' => $this->faker->paragraph
+            'created_at' => new \DateTime(),
+            'updated_at' => null
         ];
     }
 }

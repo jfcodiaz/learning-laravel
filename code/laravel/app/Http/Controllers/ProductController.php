@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\ProductRequests;
 use App\Services\Products\CreateProductService;
@@ -25,7 +26,8 @@ class ProductController extends Controller
             'route' => route('products.store'),
             'title' => __('products/form.new-product'),
             'callAction' => __('products/form.create'),
-            'product' => new Product()
+            'product' => new Product(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -35,8 +37,8 @@ class ProductController extends Controller
 
         $name = $request->post('name');
         $description = $request->post('description');
-
-        $createProductService($name, $description);
+        $categories = $request->post('categories');
+        $createProductService($name, $description, $categories);
 
         return redirect(route('products.index'));
     }
@@ -53,16 +55,19 @@ class ProductController extends Controller
             'route' => route('products.update', ['product' => $product]),
             'title' => 'Edición de producto',
             'callAction' => 'Actualizar',
-            'product' => $product
+            'product' => $product,
+            'categories' => Category::all()
         ]);
     }
 
     public function update(ProductRequests $request, Product $product, UpdateProductService $updateProductService) {
+
         $request->validated();
         $updateProductService(
             $product,
             $request->post('name'),
-            $request->post('description')
+            $request->post('description'),
+            $request->post('categories')
         );
 
         return redirect(route('products.index'));

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 
@@ -16,12 +17,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UsersSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class
         ]);
-        Product::factory(100)->create();
 
-        $producto = new Product();
-        $producto->name = 'PS5';
-        $producto->description = 'Consola de videojuegos';
-        $producto->save();
+
     }
 }
