@@ -38,7 +38,8 @@ class ProductController extends Controller
         $name = $request->post('name');
         $description = $request->post('description');
         $categories = $request->post('categories');
-        $createProductService($name, $description, $categories);
+        $user = auth()->user();
+        $createProductService($name, $description, $categories, $user);
 
         return redirect(route('products.index'));
     }
