@@ -40,6 +40,6 @@ Route::group([
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])
-        ->middleware('permission:destroy_product')
+       // ->middleware('permission:destroy_product')
         ->name('products.destroy');
 });
