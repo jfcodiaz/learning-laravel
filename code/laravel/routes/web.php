@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ProductController;
+use \App\Http\Controllers\CategoriesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,13 +35,9 @@ Route::group([
         'len' => 'es|en'
     ]
 ], function () {
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');//->withoutMiddleware('setLocale');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])
-       // ->middleware('permission:destroy_product')
-        ->name('products.destroy');
+    Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoriesController::class, ['except' => ['create', 'show', 'edit']]);
+    // ->middleware('permission:destroy_product')
 });
+
+Route::view('tailwind/grid', 'tailwindcss.grid');
