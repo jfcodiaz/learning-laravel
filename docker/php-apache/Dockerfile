@@ -9,6 +9,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     mysqli \
     pdo_pgsql \
     pdo_mysql \
+    ext-zip \
     "
 
 # Install composer and update path
@@ -40,7 +41,7 @@ RUN docker-php-ext-install pdo pdo_mysql
 RUN mkdir /root/.nvm
 ENV NVM_DIR /root/.nvm
 ENV NODE_VERSION v12.22.10
-
+ENV npm_config_user=root
 
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.9/install.sh | bash
 RUN chmod +x $HOME/.nvm/nvm.sh
@@ -49,6 +50,12 @@ RUN . $HOME/.nvm/nvm.sh && nvm install $NODE_VERSION && nvm alias default $NODE_
 RUN ln -sf /root/.nvm/versions/node/v$NODE_VERSION/bin/node /usr/bin/nodejs
 RUN ln -sf /root/.nvm/versions/node/v$NODE_VERSION/bin/node /usr/bin/node
 RUN ln -sf /root/.nvm/versions/node/v$NODE_VERSION/bin/npm /usr/bin/npm
+
+RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
+    libzip-dev
+
+RUN docker-php-ext-install zip
 
 WORKDIR "/var/www"
 
