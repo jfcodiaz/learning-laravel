@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use App\Http\Requests\ProductRequests;
 use App\Services\Products\CreateProductService;
 use App\Services\Products\UpdateProductService;
-use Illuminate\Support\Facades\Auth;
 
 
 class ProductController extends Controller
@@ -22,7 +21,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.form',[
+        return view('products.form', [
             'route' => route('products.store'),
             'title' => __('products/form.new-product'),
             'callAction' => __('products/form.create'),
@@ -44,14 +43,16 @@ class ProductController extends Controller
         return redirect(route('products.index'));
     }
 
-    public function show(Product $product) {
+    public function show(Product $product)
+    {
         return view('products.show', [
             'product' => $product
         ]);
     }
 
-    public function edit(Product $product){
-        return view('products.form',[
+    public function edit(Product $product)
+    {
+        return view('products.form', [
             'method' => 'PUT',
             'route' => route('products.update', ['product' => $product]),
             'title' => 'Edición de producto',
@@ -61,8 +62,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(ProductRequests $request, Product $product, UpdateProductService $updateProductService) {
-
+    public function update(ProductRequests $request, Product $product, UpdateProductService $updateProductService)
+    {
         $request->validated();
         $updateProductService(
             $product,

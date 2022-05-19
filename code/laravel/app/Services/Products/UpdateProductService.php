@@ -3,7 +3,8 @@ namespace App\Services\Products;
 
 use App\Models\Product;
 
-class UpdateProductService {
+class UpdateProductService
+{
 
     public function __invoke(Product $product, string $name, string $description, array $categories): void
     {

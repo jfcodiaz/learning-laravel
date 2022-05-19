@@ -22,7 +22,7 @@ class ProductControllerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        if($this->getName() === 'test_create_is_visible') {
+        if ($this->getName() === 'test_create_is_visible') {
             return;
         }
 
@@ -38,11 +38,9 @@ class ProductControllerTest extends TestCase
 
         $this->actingAs($this->user);
 
-        if($this->getName() != 'test_store_new_product'){
+        if ($this->getName() != 'test_store_new_product') {
             $this->createProduct();
         }
-
-
     }
 
     public function test_create_is_visible(): void
@@ -80,7 +78,7 @@ class ProductControllerTest extends TestCase
 
         $url = route('products.update', [
             'len' => 'es',
-            'product'=> $this->product->id
+            'product' => $this->product->id
         ]);
 
         $this->put($url, [
@@ -99,11 +97,12 @@ class ProductControllerTest extends TestCase
         $this->assertNotNull($updatedProduct->categories()->find($this->categoryA));
     }
 
-    public function test_delete_product(): void {
+    public function test_delete_product(): void
+    {
         /** @var Product $producto */
         $product = Product::query()->find($this->product->id);
         $this->assertNotNull($product);
-        $url = route('products.destroy',[
+        $url = route('products.destroy', [
             'product' => $this->product->id,
             'len' => 'es'
         ]);
@@ -113,7 +112,8 @@ class ProductControllerTest extends TestCase
         $this->assertNull($product);
     }
 
-    private function createProduct(){
+    private function createProduct()
+    {
         $createProductService = $this->app->make(CreateProductService::class);
         $this->product = $createProductService($this->productName, $this->description, [
             $this->categoryB->id
